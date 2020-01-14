@@ -1,0 +1,19 @@
+---
+title: "Hello R Markdown"
+author: "Marguerite"
+date: "2020-01-14"
+output: pdf_document
+---
+
+This is a paragraph in an R Markdown document.
+
+Below is a code chunk:
+
+```{r}
+fit = lm(dist ~ speed, data = cars)
+b   = coef(fit)
+plot(cars)
+abline(fit)
+```
+
+There are two parameters in a regression: b[1] = `r b[1]` and b[2] = `r b[2]`. Which one is the slope and which is the intercept?
