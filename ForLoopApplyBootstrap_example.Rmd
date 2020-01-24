@@ -1,0 +1,237 @@
+---
+title: "For Loop, Apply, Boostrap Example using our friend Iris"
+author: "Marguerite"
+date: "2020-01-24"
+output: html_document
+---
+In this example, letʻs suppose we want to get a 95% Confidence Interval around the mean using Bootsrap (sampling with replacement). 
+For the data, letʻs use petal length from setosa:
+
+```{r}
+petalL <- iris[iris$Species=="setosa","Petal.Length"]
+```
+The pseudo code for this problem might look like:
+
+1. generate sample for petalL
+2. get mean
+3. generate 100 samples
+4. generate 100 means (100 bootstraps)
+5. Calculate 95% CI from distribution of sampled means, compare to true mean
+
+# Generating a sample with replacement, calculate mean
+
+```{r}
+sample( petalL, replace=T )
+mean( sample( petalL, replace=T ) )
+```
+
+# How to generate 100 means?  So many ways
+
+This problem can actually be broken down further (see pseudocode above) but in essence it involves the calculations plus storage of the objects. What type of *bucket* do we want to store our values in?
+
+## Create a list
+
+```{r}
+allmeans <- vector("list", 100)
+```
+## Fill it using a for loop
+
+```{r}
+for ( i in 1:100) {
+	
+	allmeans[i] <- mean( sample( petalL, replace=T ) ) 
+}
+head(allmeans)
+```
+
+## Does it work if our bucket is a vector?
+
+```{r}
+allmeans <- vector()  # you may need to do vector(length=100)
+for ( i in 1:100) {
+	
+	allmeans[i] <- mean( sample( petalL, replace=T ) ) 
+}
+head(allmeans)
+```
+
+# Actually, letʻs not try to do too many steps at once. 
+
+## Baby steps: take a sample, get the mean
+
+```{r}
+x <- sample(petalL, replace=T)
+mean(x)
+```
+
+## Use lapply to get 100 samples
+
+`lapply` operates over a list or a vector, and runs a function on each element. Our function is `sample` and our vector is 50, the size of the sample we want, repeated 100 times for our 100 samples. We give the other arguments to `sample` as additional arguments. (Showing first 6):
+
+```{r eval=F}
+lapply( rep(50,100), sample, x=petalL, replace=T)
+samples <- lapply ( rep(50, 100), sample, x=petalL, replace=T)
+```
+```{r echo=F}
+head(lapply( rep(50,100), sample, x=petalL, replace=T))
+samples <- lapply ( rep(50, 100), sample, x=petalL, replace=T)
+```
+
+Can we just take the mean? What is the problem?
+
+```{r}
+mean(samples)
+```
+
+`samples` is a list, so use `lapply` to get means of each sample. This works (just showing first 6):
+
+```{r eval=F}
+lapply (samples, mean)
+```
+```{r echo=F}
+head(lapply (samples, mean))
+```
+So save it:
+
+```{r}
+allmeans <- lapply (samples, mean)
+```
+Our final code using `lapply` can be condensed to 2 lines, not too bad:
+
+```{r}
+samples <- lapply ( rep(50, 100), sample, x=petalL, replace=T)
+allmeans <- lapply(samples, mean)
+head(allmeans)
+```
+## Another way is to define the function within lapply:
+
+Note here that x is just a dummy variable. It takes on a single value of the input list, but we donʻt actually use it
+
+```{r eval=F}
+lapply ( rep(50, 100), function(x) { mean(sample( petalL, replace=T))})
+```
+```{r echo=F}
+head(lapply ( rep(50, 100), function(x) { mean(sample( petalL, replace=T))}))
+```
+
+Now try sapply on any/all of the above. For example:
+
+```{r eval=F}
+sapply ( rep(50, 100), function(x) { mean(sample( petalL, replace=T))})
+```
+```{r echo=F}
+sapply ( rep(50, 100), function(x) { mean(sample( petalL, replace=T))})
+```
+
+See what they mean about "pretty" output? sapply returns a vector or a matrix if it can.
+
+# Back to our confidence interval example:
+
+```{r}
+samples <- lapply ( rep(50, 100), sample, x=petalL, replace=T)
+allmeans <- sapply(samples, mean)
+
+hist(allmeans)
+```
+
+This is a bit blocky, so letʻs plot more bins:
+```{r}
+hist(allmeans, breaks=20)
+```
+
+The 95% confidence interval is where 95% of the sampled means falls. So if we sort them and draw a line at the 2.5 percentile, and the 97.5 percentile, weʻll see the 95%CI
+
+```{r}
+ss <- sort(allmeans)
+ss[3] ## lower 2.5% only 100, so round to 3
+ss[97] ## upper 97.5%, round to 97
+```
+You could do more samples to cleanly separate 2.5 and 97.5%
+
+## Plot with bells and whistles:
+
+* Plot the true mean of petalL in red, CI in blue
+* Add labels to plot
+* Arrows to indicate 95% CI
+
+```{r eval=F}
+h <- hist(allmeans, breaks=20)
+
+abline( v=mean(petalL), col="red", lwd=3)
+abline( v=ss[3], col="blue", lwd=3)
+abline( v=ss[97], col="blue", lwd=3)
+text(mean(petalL), 1, "True Mean", pos=4, col="red", cex=2)
+text(ss[3], 10, "Lower 2.5%", pos=4, col="blue")
+text(ss[97], 10, "Upper 97.5%", pos=2, col="blue")
+arrows(ss[3], 9.75, ss[97], 9.75, lty=2, code=3, col="blue")
+text(mean(petalL), 10, "95% CI", col="blue")
+```
+```{r echo=F}
+h <- hist(allmeans, breaks=20)
+ymax <- max(h[["counts"]])
+hist(allmeans, breaks=20, ylim=c(0, ymax+2))
+
+abline( v=mean(petalL), col="red", lwd=3)
+abline( v=ss[3], col="blue", lwd=3)
+abline( v=ss[97], col="blue", lwd=3)
+
+text(mean(petalL), 1, " True Mean", col="red", cex=1.5)
+text(ss[3], ymax+1.25, "Lower 2.5%", pos=4, col="blue")
+text(ss[97], ymax+1.25, "Upper 97.5%", pos=2, col="blue")
+arrows(ss[3], ymax+.75, ss[97], ymax+.75, lty=2, code=3, col="blue")
+text(mean(petalL), ymax+1.25, "95% CI", col="blue")
+```
+
+The mean is mean(petalL), and the 95% CI is (ss[3], ss[97])
+
+We can also plot the "density" of the means using a kernal density method assuming Gaussian kernal densities (Normal)
+
+```{r}
+density(allmeans)
+plot(density(allmeans))
+```
+
+What is the object returned from `density`? Check using structure function:
+
+```{r}
+d <- density(allmeans)
+str(d)
+```
+
+It is a list with 7 elements, y is the probability density. To get the maximum height to put our labels on the graph:
+
+```{r}
+d <- density(allmeans)
+ymax <- max(d[["y"]])  ## use to size y-axis
+```
+
+## Bells and whistles:
+
+```{r}
+plot(d, ylim=c(0, ymax+2))
+
+abline( v=mean(petalL), col="red", lwd=3)
+abline( v=ss[3], col="blue", lwd=3)
+abline( v=ss[97], col="blue", lwd=3)
+
+text(mean(petalL), 1, " True Mean", col="red", cex=1.5)
+text(ss[3], ymax+1, "Lower 2.5%", pos=2, col="blue")
+text(ss[97], ymax+1, "Upper 97.5%", pos=4, col="blue")
+arrows(ss[3], ymax+.75, ss[97], ymax+.75, lty=2, code=3, col="blue")
+text(mean(petalL), ymax+1.25, "95% CI", col="blue")
+
+```
+
+# R notes
+
+* Using for loops versus lapply/sapply is a matter of personal preference, although often apply methods are faster than loops. This is because R is vectorized and has efficient methods for operating on an entire vector/list at once. 
+
+* If you must iterate the value (i.e., the value changes on each iteration and feeds into the next loop, you will have to use a for loop or a do while). 
+
+* lapply and sapply are generally interchangable but sapply will return a vector or matrix if it can. lapply always returns a list.
+
+* Which order of operations and objects are optimal may differ bewtween a for loop strategy vs. a vectorized operation: 
+	+ For loop: (generate sample, generate mean) x 100 -> output
+	+ apply method: 100 samples -> 100 means -> output
+
+* Note that non-parametric CIʻs donʻt have to be symmetric. It depends only on the sample distribution.
