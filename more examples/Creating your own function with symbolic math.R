@@ -23,3 +23,4 @@ funkx(2^x, x<-1:8)
 funkx(sin(x), x<-1:100*.1)# etc.
 
 plotfunkx(sin(x), x<-1:100*.1)# etc.
+plotfunkx(2^x, x<-1:8)# etc.

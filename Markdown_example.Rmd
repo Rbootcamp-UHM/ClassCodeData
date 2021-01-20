@@ -2,7 +2,7 @@
 title: "Hello R Markdown"
 author: "Marguerite"
 date: "2020-01-14"
-output: pdf_document
+output: html_document
 ---
 
 This is a paragraph in an R Markdown document.

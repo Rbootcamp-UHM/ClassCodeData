@@ -1,0 +1,121 @@
+x <- rnorm(50)
+x
+class(x)
+x <- matrix(x, ncol=2)
+cars     # built in dataset - comes with R
+cars     # built in dataset - comes with R#
+#
+speed <-  cars$speed  # save speed as a vector#
+dist <-  cars$dist
+speed
+ls
+ls()
+searchpaths()
+e <- numberic()
+e <- numeric()
+e
+e[3] <- 17
+e
+alpha
+pi
+alpha <- alpha[2*1:5]
+alpha <- 1:10
+alpha
+alpha <- alpha[2*1:5]
+alpha
+data.frame( alpha, id = 1:5)
+dat <- data.frame( alpha, id = 1:5)
+dat
+dim(dat)
+attr(dat)
+attr(dat, "dim")
+attr(z, "dim") <- c(10,10)
+z <- matrix()
+z
+attr(z, "dim") <- c(10,10)
+a=1:3
+a
+class(a)
+mode(a)
+a=1:3
+class(a)
+mode(a)
+class(pi)
+mode(pi)
+pi
+c(a, pi)
+cbind(a, pi)
+class(c(a,pi))
+class(cbind(a,pi))
+mata <- cbind(a,pi)
+class(mata)
+c(mata, mata)
+c(mata)
+c(mata, pi)
+c(mata, pi)
+c(a,pi)
+a
+pi
+mata
+rep(mata, 100)
+rep(a, 100)
+cbind(a, mata)
+cbind(rep(a,10), mata)
+x <- 1:5
+a
+x
+2*x + a
+mata[1, ]
+mata[, 1]
+mata[1 , 1]
+mata
+class(mata[1 , 1])
+mata[ , "pi"]
+mata[ 1 , "pi"]
+mata[ 1 , "a"]
+mata[ 2 , "a"]
+mata[ 3 , "a"]
+mata$a
+mata <- as.data.frame(mata)
+class(mata)
+mata[ 3 , "a"]
+mata$a
+mata$pi
+setwd("Documents/Rclass/ClassCodeData/")
+list.files()
+source("cars_script.R")
+cars
+head(cars)
+tail(cars)
+speed <-  cars$speed
+speed
+dist <-  cars$dist
+dist
+plot( speed, dist, cex=2)  # plot x,y
+plot( speed, dist, cex=10)  # plot x,y
+plot( speed, dist, cex=11)  # plot x,y
+plot( speed, dist, cex=1)  # plot x,y
+?points
+TestChars <- function(sign = 1, font = 1, ...)#
+{#
+   MB <- l10n_info()$MBCS#
+   r <- if(font == 5) { sign <- 1; c(32:126, 160:254)#
+       } else if(MB) 32:126 else 32:255#
+   if (sign == -1) r <- c(32:126, 160:255)#
+   par(pty = "s")#
+   plot(c(-1,16), c(-1,16), type = "n", xlab = "", ylab = "",#
+        xaxs = "i", yaxs = "i",#
+        main = sprintf("sign = %d, font = %d", sign, font))#
+   grid(17, 17, lty = 1) ; mtext(paste("MBCS:", MB))#
+   for(i in r) try(points(i%%16, i%/%16, pch = sign*i, font = font,...))#
+}#
+TestChars()
+try(TestChars(sign = -1))#
+TestChars(font = 5)  # Euro might be at 160 (0+10*16).#
+                     # macOS has apple at 240 (0+15*16).#
+try(TestChars(-1, font = 2))  # bold
+getwd()
+savehistory(file="Jan13_2021.history")
+?savehistory
+savehistory(file="Jan13_2021.history")
+savehistory( file = "Jan13_2021.history" )

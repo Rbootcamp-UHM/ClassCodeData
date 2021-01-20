@@ -1,0 +1,46 @@
+---
+title: "How to build a function"
+author: "Marguerite"
+date: "2020-01-21"
+output: html_document
+---
+
+Suppose we want to write a function for square:
+
+```{r}
+x <- 10
+xsq <- 10*10
+```
+
+Use the `function()` function to create a custom 
+function. Put your working code between `{ }` on 
+separate lines, put arguments between `()`, and give
+your functin a name.
+Use the `return()` function to return a value/object. 
+
+```{r}
+square <- function( x ) {
+  return ( x*x )
+}
+```
+
+It is always good to show some examples
+
+```{r}
+square( 10 )
+```
+
+How it works on a vector
+
+```{r}
+x <- 1:6
+square(x) # (element by element)
+```
+
+How it works on a matrix
+
+```{r}
+m <- matrix(x, nrow=2)
+m
+square(m)
+```
