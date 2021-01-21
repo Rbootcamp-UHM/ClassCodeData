@@ -1,0 +1,138 @@
+# setwd("C:/Users/marguerite/Documents/Rclass")#
+#
+# cars <- read.csv( "cars.csv") # this is how you would read it if it were in your working directory#
+cars     # built in dataset - comes with R - take a look at it#
+#
+speed <-  cars$speed  # Saved speed as a vector.#
+dist <-  cars$dist    # Saved distance as a vector#
+#
+par(mfrow=c(1,2)) # Splits the plot environments so that both data sets are visible.#
+plot( speed, dist, cex=1)  # Plotted x, y#
+speed.lm <- lm (dist ~ speed)   # Fit regression line, saved as speed.lm
+abline( speed.lm, col="red" )   # Plotted regression line - best fit line to the points
+coef(speed.lm)
+slope <- coef(speed.lm)["speed"]#
+intercept <- coef(speed.lm)["(Intercept)"]
+# The regression distance ~ (as a function of) speed predicts distance from the speed data. Compute the fitted distance (if they fell perfectly on the line) from speed:#
+dist_fit <- slope*speed + intercept
+dist_fit
+points( dist_fit ~ speed, pch=16, col="red" )
+points(speed[49], dist[49], cex=1, pch=16, col="red" )
+Diffdist <- abs( dist - dist_fit )
+which(Diffdist==max(Diffdist))
+i=49#
+segments( speed[i], dist[i], speed[i], dist_fit[i], col="red", lty=2 )
+z=(1:50)#
+segments( speed[z], dist[z], speed[z], dist_fit[z], col="red", lty=2 )
+fastcars <- cars[26:50,]#
+#
+# Plotted the fast data and regression line for the faster data set:#
+ fspeed <- fastcars$speed#
+ fdist <- fastcars$dist#
+ plot( fspeed, fdist, cex=1)#
+ fspeed.lm <- lm ( fdist ~ fspeed)#
+ abline( fspeed.lm, col="blue")
+?plot
+?mean
+balls <- c("red", "red", "blue", "green")
+class(balls)
+balls <- factor(balls)
+class(balls)
+balls
+str(balls)
+?factor
+?c
+c(balls)
+c(balls,balls)
+c(balls,"a", balls)
+mode(c(balls,"a", balls))
+class(c(balls,"a", balls))
+vec <- c(1:5)
+class(vec)
+as.character(vec)
+as.numeric(balls)
+as.numeric(c("a","b"))
+as.numeric(factor(c("a","b")))
+?cbind
+vec
+let <- letters[1:5]
+let
+sample(vec)
+vec <- sample(vec)
+vec
+cbind(let, vec)
+mat <- cbind(let, vec)
+class(mat)
+order(mat[,2])
+mat[,2]
+oo <- order(mat[,2])
+oo
+mat[ , 1]
+mat[ 1 , ]
+mat[ 5 , ]
+mat[ oo , ]
+mat
+mat[ c(1,1), ]
+mat[ 1 , ]
+mat[ c(1,1), ]
+mat[ c(1,1,1), ]
+mat[ c(1,2,3), ]
+TRUE
+FALST
+FALSE
+T
+F
+sum(TRUE)
+sum(FALSE)
+mat
+mat == "a"
+sum(mat == "a")
+vec
+sample(vec, replace=F)
+sample(vec, replace=F)
+sample(vec, replace=F)
+sample(vec, replace=T)
+sample(vec, replace=T)
+sample(vec, replace=T)
+sample(vec, replace=T)
+?runif
+?mean
+x <- c(0:10, 50)
+xm <- mean(x)
+xm
+x
+?install.packages
+install.packages(geiger)
+vec
+vec == 2
+vec > 2
+vec <
+2
+vec <= 2
+less than 2 and greater than 4?
+vec < 2
+vec > 4
+vec < 2 & vec > 4
+vec < 2 | vec > 4
+(vec < 2) | (vec > 4)
+vec[ (vec < 2) | (vec > 4) ]
+greater than 2 and less than 4?
+vec[ (vec > 2) | (vec < 4) ]
+(vec > 2) | (vec < 4)
+vec > 2
+vec < 4
+(vec > 2) & (vec < 4)
+vec[(vec > 2) & (vec < 4)]
+subset.data.frame
+iris$Species
+iris$Species=="setosa"
+ii <- iris$Species=="setosa"
+ii
+iris[ii,]
+iris[ii,]
+plot(iris$Sepal.Length, iris$Sepal.Width)
+point(iris$Sepal.Length[ii], iris$Sepal.Width[ii], cex=16, col="red")
+points(iris$Sepal.Length[ii], iris$Sepal.Width[ii], cex=16, col="red")
+points(iris$Sepal.Length[ii], iris$Sepal.Width[ii], pch=16, col="red")
+plot(iris$Sepal.Length, iris$Sepal.Width)
+points(iris$Sepal.Length[ii], iris$Sepal.Width[ii], pch=16, col="red")
