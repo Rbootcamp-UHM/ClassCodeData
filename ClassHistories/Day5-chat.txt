@@ -1,0 +1,12 @@
+16:18:27	 From Nelson Simbajon, Jr. : Its neat, I like the lazy way.
+16:23:28	 From Nelson Simbajon, Jr. : >mat ["r4", "c"]
+16:23:31	 From taylor : mat["r4","c"]
+16:23:50	 From Ronja Steinbach : The quotes are vital
+16:24:54	 From Frank Wang Dachuan : > mat[4,4]
+16:25:41	 From Ronja Steinbach : mat[4,4]; mat[1,1]
+16:25:48	 From taylor : paste(mat[4,4],mat[2,1])
+16:27:16	 From Frank Wang Dachuan : > c(mat[1,1],mat[4,4])
+16:28:06	 From Erika Cabell : mat[c(mat[1,1], mat[4,4])]
+16:43:32	 From Nelson Simbajon, Jr. : As cute as a chameleon can be.
+16:43:46	 From Marguerite Butler : https://youtu.be/5nIAW4wIyNE
+17:27:25	 From Nelson Simbajon, Jr. : Thankl you for the lecture.  Enjoy your weekend :)
