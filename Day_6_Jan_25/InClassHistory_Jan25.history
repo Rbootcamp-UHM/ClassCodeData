@@ -1,0 +1,148 @@
+sp <- c("a", "a", "a", "b", "b", "c", "c")
+sp
+sp=="a"
+icol <- sp
+icol
+icol [sp=="a" ]
+icol [sp=="a" ] <- "pink"
+icol
+icol [sp=="b" ] <- "blue"
+icol
+icol [sp=="c" ] <- "green"
+icol
+sample( sp )
+sample( sp )
+sample( sp )
+sample( sp )
+sp <- sample( sp )
+icol[sp=="a" ] <- "pink"
+icol[sp=="b" ] <- "blue"
+icol[sp=="c" ] <- "green"
+icol
+sp
+islands <- c("oahu", "kauai", "maui")
+islands <- c("oahu", "kauai", "maui")
+island
+islands
+for (islands) {#
+	print(island)#
+	 }
+for (islands) {#
+	print(islands)#
+	 }
+for (islands) {#
+	print(islands)#
+	 }
+for (i in islands) {#
+	print(i)#
+	 }
+for (i in 1:3) {  print(paste("This is a for loop", i)) #
+}
+for (i in 1:3) { print(paste("This is a for loop", i))}
+x <- rnorm(5)
+y <- rnorm(5)
+x
+y
+x <- rnorm(5)#
+  y <- rnorm(5)#
+  plot(x,y)
+x <- rnorm(100)#
+  y <- rnorm(100)#
+  plot(x,y)
+for (i in 1:3) { #
+  x <- rnorm(100)#
+  y <- rnorm(100)#
+  plot(x,y)#
+}
+par(mfrow=c(3,1))
+for (i in 1:3) { #
+  x <- rnorm(100)#
+  y <- rnorm(100)#
+  plot(x,y)#
+}
+for (i in 1:3) { #
+  pdf()      # opens a pdf device#
+    x <- rnorm(100)#
+    y <- rnorm(100)#
+    plot(x,y)#
+  dev.off()  # close the pdf device#
+}
+pdf()      # opens a pdf device#
+for (i in 1:3) { #
+    x <- rnorm(100)#
+    y <- rnorm(100)#
+    plot(x,y)#
+}	 #
+dev.off()  # close the pdf device
+pdf()      # opens a pdf device#
+for (i in 1:3) { #
+    x <- rnorm(100)#
+    y <- rnorm(100)#
+    plot(x,y, main = paste("this is plot", i))#
+}	 #
+dev.off()  # close the pdf device
+dev.off()
+?main
+?title
+mylist <- vector("list")   ## creates a null (empty) list#
+for (i in 1:4) {#
+   mylist <- c(mylist, list(data.frame(x=rnorm(3), y=rnorm(3))))#
+}#
+mylist
+class(mylist)
+mylist[1]
+mylist[[1]]
+class(mylist[1])
+class(mylist[[1]])
+length(mylist)
+dim(mylist)
+dim(mylist[[1]])
+names(mylist) <- c("mickey", "donald", "goofy")
+mylist
+names(mylist) <- c("mickey", "donald", "goofy", "minnie")
+mylist
+mylist$mickey
+mylist[1]
+pdf()      # opens a pdf device#
+for (i in mylist) { #
+    plot(mylist[[i]], main = paste("this is plot", i))#
+}	 #
+dev.off()  # close the pdf device
+pdf()      # opens a pdf device#
+for (i in mylist) { #
+    plot(mylist[[i]], main = paste("this is plot", names(mylist[[i]])))#
+}	 #
+dev.off()  # close the pdf device
+pdf(file="mickey.pdf")      # opens a pdf device#
+for (i in mylist) { #
+    plot(mylist[[i]], main = paste("this is plot", i))#
+}	 #
+dev.off()  # close the pdf device
+for (i in 1:4) { #
+    plot(mylist[[i]], main = paste("this is plot", i))#
+}
+for (i in 1:length(mylist)) { #
+    plot(mylist[[i]], main = paste("this is plot", i))#
+}
+i = 1
+mylist[[i]]
+plot(mylist[i], main = paste("this is plot", i))
+mylist[i]
+mylist[[i]]
+plot(mylist[[i]]$x, mylist[[i]]$y, main = paste("this is plot", i))
+for (i in islands) {#
+	print(i)#
+	 }
+for (islands) {#
+	print(i)#
+	 }
+for (i in islands) {#
+	print(i)#
+	 }
+for (i in 1:length(islands)) {#
+	print(islands)#
+	 }
+1:length(islands)
+for (i in islands) {#
+ 	print(i)#
+ 	 }
