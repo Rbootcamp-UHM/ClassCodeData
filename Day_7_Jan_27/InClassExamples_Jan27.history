@@ -1,0 +1,368 @@
+require(ape)  # install ape if you need to
+?ape
+?read.GenBank
+ref <- c("U15717", "U15718", "U15719", "U15720",#
+         "U15721", "U15722", "U15723", "U15724")
+read.GenBank(ref, as.character=TRUE)
+Rampho <- read.GenBank(ref, as.character=TRUE)
+length(Rampho)
+Rampho[1]
+attr(Rampho[1])
+attr(Rampho[[1]])
+attr(Rampho)
+str(Rampho)
+attr(Rampho, "description")
+Rampho <- read.GenBank(ref, as.character=TRUE, species.names=F)
+str(Rampho)
+Rampho <- read.GenBank(ref)
+str(Rampho)
+Rampho <- read.GenBank(ref, as.character=F)
+Rampho <- read.GenBank(ref, as.character=T)
+str(Rampho)
+Rampho <- read.GenBank(ref)
+Rampho[[1]]
+attr(Rampho[[1]])
+attr(Rampho[1])
+attr(Rampho[1], "description")
+names(Rampho)
+attr(Rampho, "description")
+write.dna(Rampho, file="Rampho.txt")
+write.fasta(Rampho, file="Rampho.fasta")
+?write.fasta
+??write.fasta
+write.FASTA(Rampho, file="Rampho.fasta")
+Rampho
+attr(Rampho, "description")
+desc <- attr(Rampho, "description")
+write.FASTA(Rampho, file="Rampho.fasta", desc)
+write.FASTA(Rampho, file="Rampho.fasta")
+write.csv(desc, file="Rampho.desc.csv", row.names=F)
+?write.csv
+split(desc, " ")
+strsplit(desc, " ")
+strsplit(desc, ",")
+ll <- strsplit(desc, ",")
+ll
+paint.iris <- function(iris, sp) { #
+	icol <- c(iris$Species)#
+	sp <- iris$Species#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(iris[, -5], col=icol)#
+	}
+paint.iris(iris, iris$Species)
+sp <- sample(iris$Species)
+paint.iris(iris, sp)
+sp <- sample(iris$Species)
+paint.iris(iris, sp)
+sp <- sample(iris$Species)
+sp
+icol <- c(iris$Species)
+icol
+sp <- iris$Species
+sp
+icol[sp=="setosa"] <- "red"
+icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"
+icol
+sp <- sample(iris$Species)
+sp <- sample(iris$Species)
+sp
+icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"
+icol
+head(sp)
+head(icol)
+plot(iris[, -5], col=icol)
+sp <- sample(iris$Species)#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(iris[, -5], col=icol)
+sp <- sample(iris$Species)#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(iris[, -5], col=icol)
+sp <- sample(iris$Species)#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(iris[, -5], col=icol)
+sp <- sample(iris$Species)#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(iris[, -5], col=icol)
+sp <- sample(iris$Species)#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(iris[, -5], col=icol)
+paint.iris <- function(dat, sp ) {#
+	spp <- sample(sp)#
+	icol[spp=="setosa"] <- "red"#
+	icol[spp=="versicolor"] <-"purple"#
+	icol[spp=="virginica"] <- "turquoise"#
+	plot(dat, col=icol)#
+}
+paint.iris ( dat=iris[-5], sp=iris$Species )
+paint.iris ( dat=iris[-5], sp=iris$Species )
+paint.iris ( dat=iris[-5], sp=iris$Species )
+paint.iris ( dat=iris[-5], sp=iris$Species )
+paint.iris ( dat=iris[-5], sp=iris$Species )
+paint.iris ( dat=iris[-5], sp=iris$Species )
+sp <- sample(iris$Species)#
+paint.iris ( dat=iris[-5], sp )
+sp <- sample(iris$Species)#
+paint.iris ( dat=iris[-5], sp )
+sp <- sample(iris$Species)#
+paint.iris ( dat=iris[-5], sp )
+sp <- sample(iris$Species)#
+paint.iris ( dat=iris[-5], sp )
+paint.iris <- function(dat, sp ) {  # paint.iris accepts a dataframe and a species vector#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(dat, col=icol)#
+}
+paint.iris ( dat=iris[-5], iris$Species )
+sp <- sample(iris$Species)#
+paint.iris ( dat=iris[-5], sp )
+paint.iris ( dat=iris[-5], sample(iris$Species) )
+paint.iris ( dat=iris[-5], sample(iris$Species) )
+paint.iris ( dat=iris[-5], sample(iris$Species) )
+paint.iris ( dat=iris[-5], sample(iris$Species) )
+paint.iris ( dat=iris[-5], sample(iris$Species) )
+paint.iris ( dat=iris[-5], sample(iris$Species) )
+paint.iris <- function(dat, sp ) {  	#
+print(sp)#
+	icol[sp=="setosa"] <- "red"#
+print(icol)#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(dat, col=icol)#
+}
+paint.iris ( dat=iris[-5], iris$Species )
+icol
+rm(icol)
+ls()
+paint.iris ( dat=iris[-5], iris$Species )
+paint.iris <- function(dat, sp ) {  	#
+#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(dat, col=icol)#
+}
+paint.iris ( dat=iris[-5], iris$Species )
+paint.iris <- function(dat, sp ) {  	#
+    icol <- sp#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(dat, col=icol)#
+}
+paint.iris ( dat=iris[-5], iris$Species )
+iris$Species
+class(iris$Species)
+iris$Species =="setosa"
+paint.iris <- function(dat, sp ) {  	#
+    icol <- as.character(sp)#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(dat, col=icol)#
+}
+paint.iris ( dat=iris[-5], iris$Species )
+str(iris$Species)
+icol
+paint.iris ( dat=iris[-5], iris$Species )
+paint.iris <- function(dat, sp ) {  	#
+    sp <- as.character(sp)#
+	icol[sp=="setosa"] <- "red"#
+	print(icol)#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(dat, col= icol)#
+}#
+#
+paint.iris ( dat=iris[-5], iris$Species )
+paint.iris <- function(dat, sp ) {  	#
+    icol <- as.character(sp)#
+	icol[sp=="setosa"] <- "red"#
+#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	print(icol)#
+	plot(dat, col= icol)#
+}#
+#
+paint.iris ( dat=iris[-5], iris$Species )
+icol
+methods(plot)
+plot(iris)
+plot(iris[-5])
+plot(iris[,-5])
+iris[-5]
+iris[5]
+iris[,5]
+iris[[5]]
+iris[6]
+iris[5]
+iris[[5]]
+iris$Species
+x <- rnorm(10)#
+y <- rnorm(10)#
+species <- c("a", "a", "a", "b", "b")#
+ir <- data.frame(x, y, species=factor(species))
+ir
+plot(ir[-3], col=ir$species, pch=16)
+sp <- as.character(ir$species)#
+sp[sp == "a"] <- "red"#
+sp[sp == "b"] <- "blue"#
+plot(ir[-3], col=sp, pch=16)
+sp <- sample(sp)#
+sp[sp == "a"] <- "red"#
+sp[sp == "b"] <- "blue"#
+plot(ir[-3], col=sp, pch=16)
+sp <- sample(sp)#
+sp[sp == "a"] <- "red"#
+sp[sp == "b"] <- "blue"#
+plot(ir[-3], col=sp, pch=16)
+function(dat, sp, ... ){ #
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, pch=16, ...)#
+}
+simple.plot <- function(dat, sp, ... ){ #
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, pch=16, ...)#
+}
+ir
+simple.plot( ir[-3], ir$species)
+simple.plot <- function(dat, sp, ... ){ #
+  sp <- as.character(sp)#
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, pch=16, ...)#
+}
+simple.plot( ir[-3], ir$species)
+simple.plot( ir[-3], ir$species)
+simple.plot( ir[-3], ir$species)
+simple.plot( ir[-3], ir$species)
+simple.plot( ir[-3], ir$species)
+simple.plot( ir[-3], ir$species, cex=2)
+simple.plot( ir[-3], ir$species, cex=3)
+simple.plot( ir[-3], ir$species, cex=4)
+simple.plot( ir[-3], ir$species, cex=4, pch=19)
+simple.plot <- function(dat, sp, ... ){ #
+  sp <- as.character(sp)#
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, ...)#
+}
+simple.plot( ir[-3], ir$species, cex=4, pch=19)
+simple.plot <- function(dat=iris[-5], sp=iris$Species, ... ){ #
+  sp <- as.character(sp)#
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, ...)#
+}
+simple.plot()
+paint.iris <- function(dat=iris[-5], sp=iris$Species ) {  	#
+    icol <- as.character(sp)#
+	icol[sp=="setosa"] <- "red"#
+	icol[sp=="versicolor"] <-"purple"#
+	icol[sp=="virginica"] <- "turquoise"#
+	plot(dat, col= icol)#
+}
+paint.iris()
+paint.iris(sp=sample(iris$Species))
+paint.iris()
+sp
+sp <- sample(sp)#
+sp[sp == "a"] <- "red"#
+sp[sp == "b"] <- "blue"#
+plot(ir[-3], col=sp, pch=16)
+dat <- data.frame(ir[-3], sp)
+write.csv(dat, file="dat1.csv" )
+paste("out", 1:10, ".csv", sep="")
+paste("out", 1:10, ".csv", sep="-")
+paste("out", 1:10, "csv", sep=".")
+paste("out", 1:10, ".csv", sep="")
+files <- paste("out", 1:10, ".csv", sep="")
+files
+write.csv(dat, file=files )
+write.csv(dat, file=files[1] )
+files[1]
+files[2]
+files[3]
+write.csv(dat, file=files[i] )
+i=1
+write.csv(dat, file=files[i] )
+for (i in 1:10  ) {#
+	write.csv(dat, file= files[i]  )    # how can we replace the filename?#
+}
+simple.plot <- function(dat=iris[-5], sp=iris$Species, ... ){ #
+  sp <- as.character(sp)#
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, ...)#
+}
+simple.plot()
+x <- rnorm(10)#
+y <- rnorm(10)#
+species <- c("a", "a", "a", "b", "b")#
+ir <- data.frame(x, y, species=factor(species))
+simple.plot(ir[-3], ir[3])
+ir
+simple.plot(ir[-3], ir$species)
+dat <- ir
+dat
+sp
+dat$sp <- sp
+dat
+cbind(dat,sp)
+dat$species <- sp
+dat
+simple.plot <- function(dat, sp, ... ){ #
+  sp <- as.character(sp)#
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, ...)#
+  dat <- cbind(dat,sp)#
+  return(dat)	#
+}
+simple.plot(ir[-3], ir$species)
+simple.plot <- function(dat, sp, ... ){ #
+  sp <- as.character(sp)#
+  sp[sp == "a"] <- "red"                   # what can you make generic (= reusable?)#
+  sp[sp == "b"] <- "blue"#
+  plot(dat, col=sp, ...)#
+  dat <- cbind(dat,sp)#
+  return(dat)	#
+}
+simple.plot(ir[-3], ir$species)
+system("mkdir out")
+for (i in 1:10  ) {#
+	out <- simple.plot(ir[-3], ir$species)#
+	write.csv(out, file= paste("out/", files[i], sep=""  )    # how can we replace the filename?#
+}
+for (i in 1:10  ) {#
+	out <- simple.plot(ir[-3], ir$species)#
+	write.csv(out, file= paste("out/", files[i], sep=""  ))    # how can we replace the filename?#
+}
+list.files()
+list.files("out")
+outfiles <- list.files("out")
+outfiles
+paste("out", outfiles, sep="/")
+outfiles <- paste("out", outfiles, sep="/")
+outfiles
+read.csv(outfiles[1])
+read.csv(outfiles[2])
