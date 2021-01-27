@@ -72,6 +72,7 @@ write.csv(dat, file="dat1.csv" )
 	write.csv(dat, file="out1.csv")
 	write.csv(dat, file="out2.csv")
 	write.csv(dat, file="out3.csv")
+	# ...
 	write.csv(dat, file="out10.csv")
 
 
@@ -82,4 +83,24 @@ for (i in   ) {
 }
 
 # make a subdirectory and put files in there
+
+
+
+
+### Reading in sequences from GenBank
+
+require(ape)  # install ape if you need to
+?read.GenBank
+
+ref <- c("U15717", "U15718", "U15719", "U15720",
+         "U15721", "U15722", "U15723", "U15724")
+Rampho <- read.GenBank(ref)
+str(Rampho)
+desc <- attr(Rampho, "description")
+write.FASTA(Rampho, file="Rampho.fasta")
+write.csv(desc, file="Rampho.desc.csv", row.names=F)
+
+# parse desc, save bits of info 
+
+ll <- strsplit(desc, ",")
 
