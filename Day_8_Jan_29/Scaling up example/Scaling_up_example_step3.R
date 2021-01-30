@@ -13,9 +13,15 @@
 
 ## Step 3  Scaling up using a function and for loop - 6 datasets
 
-make_data <- function( n=30, slope=2) {
-	x <- rnorm( 30 )
+make_data <- function( n=30, slope=2) {  # use arguments to make more flexible
+	x <- rnorm( 30 )   
 	y <- 2*x + rnorm(30)
+	return( data.frame(x,y)	)
+}
+
+make_data <- function( n=30, slope=2) {  
+	x <- rnorm( n )    ## replace 30, 2 with arguments
+	y <- slope*x + rnorm( n )    
 	return( data.frame(x,y)	)
 }
 

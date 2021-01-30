@@ -1,0 +1,203 @@
+OU.sim.branch <- function( sigma=1, alpha=0, theta0=0, theta1=50, alpha2=0,#
+theta2=-50, ngens=200, nsplit=100, nsims=30, width=10, yylim=c(-#
+sqrt(ngens)*sigma*width/2, sqrt(ngens)*sigma*width/2))#
+{#
+  quartz( title=paste("OU simulation with sigma = ", sigma), width=9,height=6)   #open new X11 window#
+# Change quartz to x11 if on a PC or linux#
+#x11(display=paste("OU simulation with sigma = ", sigma),#
+#
+  par(pty="s")                        # square plots#
+  par(mfrow=c(1,2))             # one row, two columns#
+  par(oma=c(0,0,2,0))   # outer margins, some space for overall title#
+#
+  devs =rnorm(ngens)#
+#
+  plot(1:length(devs), sigma*devs, type = "n", col="red", ylim = yylim, xlab="Time", ylab="Value") #
+  mtext(c(paste("OU simulation with sigma =", sigma)),3,outer=T)#
+#
+  x <- 1:ngens*0        # initialize vector for lineage 1#
+  x2 <- nsplit:ngens*0  # initialize vector for lineage 2 (just from split)#
+  xfin <- cbind(1:nsims*0,1:nsims*0)  # matrix to store final values for each simulation#
+#
+  for(h in 1:nsims)      # BM simulation, plots simulations, saves end values#
+  {                      # h loops over the number of simulations#
+#
+    devs =rnorm(ngens)#
+    devs2 =rnorm(ngens-nsplit)#
+#
+    for(i in 1:(nsplit-1))           ## Before speciation (t=1 to t=99)#
+    {#
+      x[(i+1)] = alpha*(theta0-x[i])+x[i] + sigma*devs[i]#
+      lines(i:(i+1), x[i:(i+1)], col="red")    #
+    }#
+#
+    x[(nsplit+1)] = x[nsplit] + sigma*devs[nsplit]     ##SPECIES 1 AT speciation (t=100 to t=101)#
+    x2[(nsplit+1-nsplit)] = x[nsplit] + sigma*devs2[1] ##SPECIES 2#
+#
+    lines(nsplit:(nsplit+1), x[nsplit:(nsplit+1)], col="red")   ## plot SPECIES 1#
+    lines(nsplit:(nsplit+1), c(x[nsplit], x2[1]), col="red")    ## plot SPECIES 2#
+#
+    for(i in (nsplit+1):(ngens-1))                  ## After speciation   (t=101 to 200)#
+    {#
+      x[(i+1)] = alpha*(theta1-x[i])+x[i] + sigma*devs[i]#
+      j = i-nsplit                ## because second "species" starts at 100 (after the split),#
+                                  ## but vector i starts at 1, this makes it less confusing#
+      x2[(j+1)] = alpha*(theta2-x2[j])+x2[j] + sigma*devs2[j]#
+#
+      lines(i:(i+1), x[i:(i+1)], col="red")#
+      lines((i):(i+1), x2[j:(j+1)], col="blue")#
+    }#
+#
+    xfin[h,1] = x[ngens]                 ## save the end results for x & x2 in matrix xfin#
+    xfin[h,2] = x2[ngens-nsplit]#
+  }#
+#
+## plot the marginal distributions to the RHS#
+## using the values calculated from the histogram $density#
+## we could be more sophisticated and either plot these sideways with barplot#
+## or with the density function, I'll leave that as an excercise#
+#
+  histdens<-hist(c(xfin[,1],xfin[,2]) , plot=F,nclass=ngens/20)    #the histogram output#
+#
+## the rotated 'on their side' marginal plots#
+  plot(histdens$density,histdens$mids,type="l",ylim =yylim,#
+xlab="Density", ylab="Value")#
+}
+source("OU.sim.branch.R")
+OU.sim.branch(yylim=c(-100, 100))             # sigma=1
+x <- rnorm( 30 )#
+y <- 2*x + rnorm(30)#
+#
+plot( x, y )#
+cor( x, y )
+dat_list <- list()    ## create an empty list to hold datasets#
+for(i in 1:6) {       ## for loop creates 6 dataframes, 30 samples each#
+	x <- rnorm( 30 )#
+	y <- 2*x + rnorm(30)#
+	dat_list[[i]] <- data.frame(x,y)#
+print(dat_list)#
+}
+dat_list <- list()    ## create an empty list to hold datasets#
+for(i in 1:6) {       ## for loop creates 6 dataframes, 30 samples each#
+	x <- rnorm( 3 )#
+	y <- 2*x + rnorm(3)#
+	dat_list[[i]] <- data.frame(x,y)#
+print(dat_list)#
+}
+correlations <- vector()  ## create empty vector to hold corr
+par(mfrow=c(2,3))  ## set plot window to make 2 rows, 3 columns#
+for(i in 1:6) {#
+	plot( dat_list[[i]]$x, dat_list[[i]]$y )   # plot x,y #
+	correlations[i] <- cor( dat_list[[i]]$x, dat_list[[i]]$y )  #
+}
+dat_list <- list()    ## create an empty list to hold datasets#
+for(i in 1:6) {       ## for loop creates 6 dataframes, 30 samples each#
+	x <- rnorm( 30 )#
+	y <- 2*x + rnorm(30)#
+	dat_list[[i]] <- data.frame(x,y)#
+}
+correlations <- vector()  ## create empty vector to hold corr#
+par(mfrow=c(2,3))  ## set plot window to make 2 rows, 3 columns#
+for(i in 1:6) {#
+	plot( dat_list[[i]]$x, dat_list[[i]]$y )   # plot x,y #
+	correlations[i] <- cor( dat_list[[i]]$x, dat_list[[i]]$y )  #
+}
+dat[[1]]
+dat_list[[1]]
+print(correlations, digits=4)
+mean(correlations)    # mean correlation about 0.85 - 0.90
+make_data <- function( n=30, slope=2) {#
+	x <- rnorm( 30 )#
+	y <- 2*x + rnorm(30)#
+	return( data.frame(x,y)	)#
+}
+dat_list <- list()    ## create an empty list to hold datasets#
+for(i in 1:6) {       ## for loop creates 6 dataframes, 30 samples each#
+	dat_list[[i]] <- make_data(30)#
+}
+dat_list
+correlations <- vector()  ## create empty vector to hold corr#
+par(mfrow=c(2,3))  ## set plot window to make 2 rows, 3 columns#
+for(i in 1:6) {#
+	plot( dat_list[[i]]$x, dat_list[[i]]$y )   # plot x,y #
+	correlations[i] <- cor( dat_list[[i]]$x, dat_list[[i]]$y )  #
+}#
+#
+print(correlations, digits=4)#
+mean(correlations)    # mean correlation about 0.85 - 0.90
+dat_list <- lapply( rep(30, 6), make_data)   # create list of dataframes
+rep(30, 6)
+make_data <- function( n=30, slope=2) {#
+	x <- rnorm( n )#
+	y <- slope*x + rnorm( n )#
+	return( data.frame(x,y)	)#
+}
+rep(30, 6)
+lapply( rep(3, 6), make_data)
+lapply( rep(5, 6), make_data)
+lapply( rep(10, 6), make_data)
+make.data()
+make_data()
+make_data <- function( n=30, slope=2) {	x <- rnorm( n )	y <- slope*x + rnorm( n )	return( data.frame(x,y)	)}
+make_data()
+dat_list <- lapply( rep(3, 6), make_data)
+dat_list
+par(mfrow=c(2,3))#
+lapply( dat_list, plot)   # plot each dataset#
+#
+correlations <- sapply( dat_list, function(X)  cor(X$x, X$y) )#
+print(correlations, digits=4)#
+mean(correlations)    # mean correlation about 0.85 - 0.90
+make_data <- function( n=30, slope=2) {#
+	x <- rnorm( n )#
+	y <- slope*x + rnorm( n )#
+	return( data.frame(x,y)	)#
+}
+draw_bootstrap <- function( dat ) {#
+	ii <- sample(1:nrow(dat), nrow(dat), replace=TRUE)#
+	return( dat[ii,] )#
+}
+dat <- make_data(30) ## make one dataset
+dat
+sample_list <- lapply( 1:1000, function(X) { draw_bootstrap(dat) })
+correlations <- sapply( sample_list, function(X)  cor(X$x, X$y) )#
+print(correlations, digits=4)
+mean(correlations)  # mean correlation 0.87
+sort(correlations)
+CI_lower <- sort(correlations)[25]  # 0.76#
+CI_upper <- sort(correlations)[975]  #0.93
+CI_lower
+CI_upper
+density(correlations)
+plot(density(correlations))   # the probability density of the means
+abline( v=mean(correlations) )
+abline( v=CI_lower, lty=3, col="blue" )  # blue dotted line at the lower CI#
+abline( v=CI_upper, lty=3, col="blue" )  # blue dotted line at the upper CI
+abline( v=CI_lower, lty=2, col="blue" )  # blue dotted line at the lower CI
+abline( v=CI_lower, lty=2, lwd=3, col="blue" )  # blue dotted line at the lower CI
+pc.iris <- princomp (~ .-Species, data=iris, scores=T) #
+# Same as #
+# 		pc.iris <- princomp( ~  Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris, scores=T)#
+#
+## The important point for us is how to USE functions, what is the class of the inputs and outputs?#
+#
+class(pc.iris)#
+str(pc.iris) #
+?princomp   # returns a list of 7 objects, there is an accessor method to get the loadings()  #
+#
+pc1 <- pc.iris$scores[,1]#
+pc2 <- pc.iris$scores[,2]#
+pc3 <- pc.iris$scores[,3]#
+plot(pc2 ~ pc1, col=iris$Species, cex=2, pch=16)#
+#
+## Compare the two (original axes, pc axes)#
+with(iris, plot(Petal.Length, Sepal.Width))#
+plot(pc2 ~ pc1, col=iris$Species, cex=2, pch=16)#
+plot(pc3 ~ pc1, col=iris$Species, cex=2, pch=16)#
+## Plot the densities of the data along the PC axes#
+#
+require(MASS)#
+iris.kde <- kde2d(pc1, pc2, n=100)  # plot the bivariate kernal density of Iris#
+image(iris.kde)#
+points(pc1, pc2)
+?princomp

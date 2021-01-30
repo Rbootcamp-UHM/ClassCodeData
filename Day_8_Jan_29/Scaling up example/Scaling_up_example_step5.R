@@ -14,8 +14,8 @@
 ### function definitions ###################################
 
 make_data <- function( n=30, slope=2) {
-	x <- rnorm( 30 )
-	y <- 2*x + rnorm(30)
+	x <- rnorm( n )
+	y <- slope*x + rnorm( n )
 	return( data.frame(x,y)	)
 }
 
@@ -48,7 +48,7 @@ CI_upper <- sort(correlations)[975]  #0.93
 					## Make a plot - show with density()
 plot(density(correlations))   # the probability density of the means
 abline( v=mean(correlations) )  			# make a black line at the mean
-abline( v=CI_lower, lty=3, col="blue" )  # blue dotted line at the lower CI
+abline( v=CI_lower, lty=2, lwd=3, col="blue" )  # blue dashed line at the lower CI
 abline( v=CI_upper, lty=3, col="blue" )  # blue dotted line at the upper CI  
 
 ## The true mean falls within CI with 95% confidence
